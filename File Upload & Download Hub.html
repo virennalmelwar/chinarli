@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Transfer & Download Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @keyframes pulse-subtle {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(0.98); }
+    }
+    .dragover-active {
+      border-color: #6366f1 !important;
+      background-color: #f5f3ff !important;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 min-h-screen text-slate-100 font-sans p-4 sm:p-6 md:p-10 flex flex-col justify-between">
+
+  <!-- Floating Toast Notification -->
+  <div id="toast" class="fixed top-5 right-5 z-50 transform translate-y-[-150%] opacity-0 transition-all duration-300 pointer-events-none bg-emerald-500 text-white font-medium px-4 py-3 rounded-xl shadow-xl flex items-center gap-3">
+    <i class="fa-solid fa-circle-check text-lg"></i>
+    <span id="toastMessage">File downloaded successfully!</span>
+  </div>
+
+  <main class="max-w-4xl w-full mx-auto space-y-6">
+    
+    <!-- Top Action Bar & Header -->
+    <header class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-800/80 backdrop-blur-md p-6 rounded-2xl border border-slate-700/60 shadow-xl">
+      <div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-white flex items-center gap-3">
+          <span class="p-2.5 bg-indigo-600 rounded-xl inline-flex text-indigo-100 shadow-lg shadow-indigo-600/30">
+            <i class="fa-solid fa-cloud-arrow-down"></i>
+          </span>
+          File Hub
+        </h1>
+        <p class="text-slate-400 text-xs sm:text-sm mt-1">
+          Upload any file and generate direct instant download links.
+        </p>
+      </div>
+
+      <button 
+        id="btnDownloadSource"
+        onclick="downloadPageSource()"
+        class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-5 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold text-sm shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
+        <i class="fa-solid fa-file-arrow-down text-lg"></i>
+        <span>Download This Webpage (.html)</span>
+      </button>
+    </header>
+
+    <section 
+      id="dropZone"
+      class="border-2 border-dashed border-slate-600 hover:border-indigo-400 bg-slate-800/50 hover:bg-slate-800/80 transition-all rounded-2xl p-8 sm:p-10 text-center cursor-pointer relative group">
+      
+      <input type="file" id="fileInput" class="hidden" multiple />
+
+      <div class="flex flex-col items-center justify-center space-y-3 pointer-events-none">
+        <div class="w-16 h-16 rounded-2xl bg-indigo-500/10 text-indigo-400 group-hover:bg-indigo-600 group-hover:text-white transition-all flex items-center justify-center text-3xl shadow-inner border border-indigo-500/20">
+          <i class="fa-solid fa-arrow-up-from-bracket"></i>
+        </div>
+        <div class="space-y-1">
+          <h3 class="text-base sm:text-lg font-semibold text-white">
+            Drag & drop your files here, or <span class="text-indigo-400 underline">browse</span>
+          </h3>
+          <p class="text-xs text-slate-400 max-w-sm mx-auto">
+            Supports documents, photos, audio, videos, and zip files. Each gets an immediate download link.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-slate-800/80 backdrop-blur-md rounded-2xl border border-slate-700/60 shadow-xl overflow-hidden">
+      <!-- Section Header -->
+      <div class="px-6 py-4 border-b border-slate-700/50 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <i class="fa-regular fa-folder-open text-indigo-400"></i>
+          <h2 class="font-bold text-white text-base">Files Available for Download</h2>
+        </div>
+        <span id="fileBadge" class="text-xs bg-slate-700 text-indigo-300 font-semibold px-3 py-1 rounded-full border border-slate-600">
+          3 Items
+        </span>
+      </div>
+
+      <!-- File List Container -->
+      <ul id="fileContainer" class="divide-y divide-slate-700/40">
+        <!-- Pre-loaded Item 1 -->
+        <li class="p-4 sm:px-6 flex items-center justify-between gap-4 hover:bg-slate-700/30 transition">
+          <div class="flex items-center space-x-3.5 min-w-0">
+            <div class="w-11 h-11 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center shrink-0 text-xl">
+              <i class="fa-regular fa-file-lines"></i>
+            </div>
+            <div class="min-w-0">
+              <p class="font-medium text-white truncate text-sm">Getting-Started-Guide.txt</p>
+              <p class="text-xs text-slate-400">Text Document &bull; 1.4 KB &bull; <span class="text-emerald-400">Ready</span></p>
+            </div>
+          </div>
+          <button 
+            onclick="downloadTextContent('Getting-Started-Guide.txt', 'Welcome to your File Hub!\n\n1. You can upload any file by dragging it into the box above.\n2. Click the green button at the top to download the whole HTML application.\n3. Click any Download button to save files to your computer instantly.')"
+            class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-4 py-2 rounded-xl text-xs shadow-md transition active:scale-95 shrink-0">
+            <i class="fa-solid fa-download"></i>
+            <span class="hidden sm:inline">Download</span>
+          </button>
+        </li>
+
+        <!-- Pre-loaded Item 2 -->
+        <li class="p-4 sm:px-6 flex items-center justify-between gap-4 hover:bg-slate-700/30 transition">
+          <div class="flex items-center space-x-3.5 min-w-0">
+            <div class="w-11 h-11 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center shrink-0 text-xl">
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <div class="min-w-0">
+              <p class="font-medium text-white truncate text-sm">sample-config.json</p>
+              <p class="text-xs text-slate-400">JSON File &bull; 0.8 KB &bull; <span class="text-emerald-400">Ready</span></p>
+            </div>
+          </div>
+          <button 
+            onclick="downloadTextContent('sample-config.json', '{\n  \"siteName\": \"File Hub\",\n  \"version\": \"1.0.0\",\n  \"author\": \"Website Owner\",\n  \"supportsDownloads\": true\n}')"
+            class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-4 py-2 rounded-xl text-xs shadow-md transition active:scale-95 shrink-0">
+            <i class="fa-solid fa-download"></i>
+            <span class="hidden sm:inline">Download</span>
+          </button>
+        </li>
+
+        <!-- Pre-loaded Item 3 (CSV Sample) -->
+        <li class="p-4 sm:px-6 flex items-center justify-between gap-4 hover:bg-slate-700/30 transition">
+          <div class="flex items-center space-x-3.5 min-w-0">
+            <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center shrink-0 text-xl">
+              <i class="fa-solid fa-table"></i>
+            </div>
+            <div class="min-w-0">
+              <p class="font-medium text-white truncate text-sm">inventory-template.csv</p>
+              <p class="text-xs text-slate-400">Spreadsheet Data &bull; 560 Bytes &bull; <span class="text-emerald-400">Ready</span></p>
+            </div>
+          </div>
+          <button 
+            onclick="downloadTextContent('inventory-template.csv', 'ID,ItemName,Category,Stock\n1,Widget Alpha,Hardware,120\n2,Cloud Server,Hosting,12\n3,SSL Certificate,Security,45')"
+            class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-4 py-2 rounded-xl text-xs shadow-md transition active:scale-95 shrink-0">
+            <i class="fa-solid fa-download"></i>
+            <span class="hidden sm:inline">Download</span>
+          </button>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center text-xs text-slate-500 mt-8 pb-2">
+    Single-file standalone web application &bull; Ready to host or save locally
+  </footer>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const dropZone = document.getElementById('dropZone');
+    const fileContainer = document.getElementById('fileContainer');
+    const fileBadge = document.getElementById('fileBadge');
+    let totalItems = 3;
+
+    // Toast notification utility
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toastMessage');
+      toastMessage.textContent = message;
+      toast.classList.remove('translate-y-[-150%]', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-[-150%]', 'opacity-0');
+      }, 2500);
+    }
+
+    // Direct download for page source code
+    function downloadPageSource() {
+      const fullDoc = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+      const blob = new Blob([fullDoc], { type: 'text/html;charset=utf-8' });
+      const downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = 'index.html';
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      URL.revokeObjectURL(downloadLink.href);
+      showToast('Downloaded index.html to your computer!');
+    }
+
+    // Helper for sample text/JSON/CSV file downloads
+    function downloadTextContent(filename, text) {
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Downloaded ' + filename);
+    }
+
+    // Formats byte numbers to human-readable size
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+    }
+
+    // Determines appropriate file icon and theme based on extension
+    function getFileVisuals(name) {
+      const ext = name.split('.').pop().toLowerCase();
+      if (['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'].includes(ext)) {
+        return { icon: 'fa-regular fa-image', color: 'bg-purple-500/10 text-purple-400 border-purple-500/20' };
+      }
+      if (['pdf'].includes(ext)) {
+        return { icon: 'fa-regular fa-file-pdf', color: 'bg-rose-500/10 text-rose-400 border-rose-500/20' };
+      }
+      if (['zip', 'rar', '7z', 'tar', 'gz'].includes(ext)) {
+        return { icon: 'fa-regular fa-file-zipper', color: 'bg-amber-500/10 text-amber-400 border-amber-500/20' };
+      }
+      if (['mp3', 'wav', 'ogg'].includes(ext)) {
+        return { icon: 'fa-solid fa-music', color: 'bg-pink-500/10 text-pink-400 border-pink-500/20' };
+      }
+      if (['mp4', 'mov', 'webm'].includes(ext)) {
+        return { icon: 'fa-solid fa-video', color: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' };
+      }
+      return { icon: 'fa-regular fa-file', color: 'bg-slate-700 text-slate-300 border-slate-600' };
+    }
+
+    // Append newly selected files to the list
+    function handleIncomingFiles(fileList) {
+      const files = Array.from(fileList);
+      if (!files.length) return;
+
+      files.forEach((file) => {
+        totalItems++;
+        const { icon, color } = getFileVisuals(file.name);
+        const objectUrl = URL.createObjectURL(file);
+
+        const li = document.createElement('li');
+        li.className = 'p-4 sm:px-6 flex items-center justify-between gap-4 hover:bg-slate-700/30 transition';
+        li.innerHTML = `
+          <div class="flex items-center space-x-3.5 min-w-0">
+            <div class="w-11 h-11 rounded-xl ${color} border flex items-center justify-center shrink-0 text-xl">
+              <i class="${icon}"></i>
+            </div>
+            <div class="min-w-0">
+              <p class="font-medium text-white truncate text-sm">${file.name}</p>
+              <p class="text-xs text-slate-400">${formatBytes(file.size)} &bull; <span class="text-indigo-400">Uploaded file</span></p>
+            </div>
+          </div>
+          <a 
+            href="${objectUrl}" 
+            download="${file.name}"
+            onclick="showToast('Downloaded ${file.name}')"
+            class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-4 py-2 rounded-xl text-xs shadow-md transition active:scale-95 shrink-0">
+            <i class="fa-solid fa-download"></i>
+            <span class="hidden sm:inline">Download</span>
+          </a>
+        `;
+        fileContainer.prepend(li);
+      });
+
+      fileBadge.textContent = `${totalItems} Items`;
+      showToast(`${files.length} file(s) uploaded successfully!`);
+    }
+
+    // Drag-and-drop listeners
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('dragover-active');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('dragover-active');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover-active');
+      if (e.dataTransfer.files && e.dataTransfer.files.length) {
+        handleIncomingFiles(e.dataTransfer.files);
+      }
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      handleIncomingFiles(e.target.files);
+      fileInput.value = '';
+    });
+  </script>
+</body>
+</html>

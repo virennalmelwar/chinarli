@@ -1,48 +1,47 @@
-CHINARLI 🌿
+# CHINARLI live community chat starter
 
-A Website Created by Viren Nalmelwar
+This package includes a responsive village community website and a Firebase-powered real-time **group chat** scaffold.
 
-Welcome to CHINARLI, a website celebrating the beauty, culture, traditions, rural lifestyle, and community of Arli village.
+## What works after Firebase setup
+- Email/password registration and sign-in
+- Google sign-in (after enabling it in Firebase)
+- Real-time group messages using Cloud Firestore
+- Six village chat rooms
+- Message sender names and timestamps
+- Mobile-friendly chat layout
 
-📍 About the Village
+## Before it can go live
+The chat is **not active until you connect your own Firebase project**. The starter does not contain your account credentials, and you must never share private service-account keys.
 
-- Village: Arli
-- Taluka: Kelapur
-- District: Yavatmal
-- State: Maharashtra
-- PIN Code: 445305
-- Region: Vidarbha, India
+### 1. Create a Firebase project
+Go to https://console.firebase.google.com/ and create a project for CHINARLI.
 
-🌱 About This Website
+### 2. Register a web app
+In Project settings → General → Your apps, add a Web app. Copy the Firebase web configuration into `firebase-config.js`, replacing every `PASTE_...` placeholder.
 
-CHINARLI is a small project created to introduce our village to the world.
+### 3. Enable authentication
+In Authentication → Sign-in method, enable Email/Password. Enable Google only if you want Google login. Add `chinarli.online` to Authentication → Settings → Authorized domains.
 
-This website showcases:
+### 4. Create Firestore
+In Firestore Database, create a database. Open its Rules tab and paste the contents of `firestore.rules`, then publish. These rules require a signed-in user to read or send group messages, restrict message length and prevent users from editing/deleting posted messages. Review and strengthen them for your actual community before launch; consider group membership, admin moderation, abuse reporting and rate limiting.
 
-- Village beauty and nature
-- Rural lifestyle
-- Culture and traditions
-- Community and village pride
-- Village location
+### 5. Publish to your existing GitHub website
+Upload all files in this folder to the root of the repository used for CHINARLI:
+- `index.html`
+- `style.css`
+- `script.js`
+- `firebase-config.js`
+- `firestore.rules` (keep this for reference; publish the rules in Firebase Console)
 
-🎯 Purpose
+Keep your existing `CNAME` file and custom-domain settings. Commit changes and wait for GitHub Pages to deploy. Your domain stays `https://chinarli.online`.
 
-The purpose of CHINARLI is to share information about our village and celebrate its identity, culture, and beauty.
+## Important safety and privacy notes
+- This starter implements **group chat**, not private one-to-one chat.
+- The demo does not yet include image uploads, online presence, message deletion, reporting, or moderation dashboard.
+- Do not invite the public until you have tested authentication and database rules.
+- Add trusted moderators, reporting/blocking tools, rate limits and clear community rules before launch.
+- Do not collect or publish personal phone numbers, addresses, passwords or other sensitive information in group chats.
+- Firebase web config is designed to be included in a web app, but access must be protected by Authentication and Firestore Security Rules. Never put service-account private keys in frontend code.
 
-👨‍💻 Creator
-
-Created by: Viren Nalmelwar
-
-💻 Technologies Used
-
-- HTML – Website structure
-- CSS – Website design and styling
-- JavaScript – Website interactions
-
-🌐 Website
-
-CHINARLI – Sharing the beauty of our village with the world.
-
----
-
-CHINARLI | Created by Viren Nalmelwar
+## Local preview
+You can preview the visual layout by hosting these files from a local web server. ES modules generally do not work when opening `index.html` directly with a `file://` URL.

@@ -1,90 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="CHINARLI — a warm digital tribute to Arli village in Kelapur, Yavatmal, Maharashtra, created by Viren Nalmelwar.">
-<meta name="theme-color" content="#173f32">
-<title>CHINARLI | Arli, Yavatmal</title>
-<style>
-:root{--forest:#173f32;--leaf:#2f7655;--lime:#c7d9a2;--gold:#e9a34d;--cream:#fbf7ed;--ink:#24312b;--muted:#68756d;--white:#fff}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.65}a{color:inherit}
-header{position:sticky;top:0;z-index:20;background:#173f32f2;color:white;backdrop-filter:blur(10px)}
-.nav{max-width:1160px;margin:auto;padding:14px 22px;display:flex;justify-content:space-between;align-items:center;gap:18px}
-.brand{font:900 1.35rem system-ui;letter-spacing:3px;text-decoration:none}.brand span{color:var(--gold)}
-nav{display:flex;gap:20px;flex-wrap:wrap}nav a{text-decoration:none;font:600 .9rem system-ui;color:#f2f4ec}nav a:hover{color:#f4bc74}
-.hero{min-height:590px;position:relative;overflow:hidden;color:white;background:linear-gradient(120deg,#173f32 5%,#28684b 58%,#9b9d63 100%);display:flex;align-items:center}
-.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#102f29eF 0%,#163d32c9 52%,#173f3230 100%);z-index:1}
-.landscape{position:absolute;inset:0;width:100%;height:100%;opacity:.72}
-.hero-inner{position:relative;z-index:2;max-width:1160px;width:100%;margin:auto;padding:82px 22px 90px}
-.kicker{font:800 .78rem system-ui;letter-spacing:3px;color:#f6c27f;text-transform:uppercase}
-h1{font:900 clamp(3.5rem,9vw,7rem)/.98 system-ui;letter-spacing:-4px;margin:18px 0 12px}
-.hero p{font-size:1.2rem;max-width:620px;color:#f0f2e9}
-.byline{font:700 .95rem system-ui;color:#ffe0b1;margin-top:25px}
-.cta{display:inline-block;background:var(--gold);color:#26372d;padding:12px 20px;border-radius:999px;text-decoration:none;font:800 .95rem system-ui;margin-top:16px}
-.wrap{max-width:1160px;margin:auto;padding:76px 22px}
-.intro{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center}
-.eyebrow{font:800 .75rem system-ui;letter-spacing:2px;color:#a76525;text-transform:uppercase}
-h2{font:850 clamp(2rem,4vw,3rem)/1.1 system-ui;color:var(--forest);letter-spacing:-1px;margin:8px 0 16px}
-.lead{font-size:1.16rem;color:#48564d}
-.quote{background:#eaf0df;border-left:5px solid var(--gold);padding:27px;border-radius:0 18px 18px 0;font-size:1.35rem;color:var(--forest)}
-.quote small{display:block;font:600 .8rem system-ui;color:var(--muted);margin-top:12px}
-.fact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
-.fact{background:white;border:1px solid #e9e5d9;border-radius:16px;padding:22px;box-shadow:0 8px 24px #203b2610}
-.fact b{display:block;font:850 1.45rem system-ui;color:var(--forest)}.fact span{font: .9rem system-ui;color:var(--muted)}
-.story{background:#f0eadb}
-.story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
-.story-card{background:#fffdf7;padding:25px;border-radius:17px;border:1px solid #e5ddc9}
-.story-card .symbol{font-size:2rem}.story-card h3{font:800 1.15rem system-ui;color:var(--forest);margin:10px 0 7px}.story-card p{color:#5e6b61;margin:0}
-.location{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px;align-items:stretch}
-.location-card{background:var(--forest);color:white;border-radius:20px;padding:28px}
-.location-card h3{font:800 1.4rem system-ui;margin:0 0 10px}.location-card p{color:#e0e9df}
-.map{min-height:360px;border:0;width:100%;height:100%;border-radius:20px;background:#e7eadf}
-.map-link{display:inline-block;color:#ffe0a8;font:700 .9rem system-ui;margin-top:10px}
-.note{font: .82rem system-ui;color:#6d786e;margin-top:12px}
-.creator{background:var(--forest);color:white;text-align:center;padding:64px 22px}
-.creator .name{font:900 clamp(1.8rem,5vw,3rem) system-ui;color:#f4bd72;letter-spacing:1px}
-.creator p{max-width:680px;margin:12px auto;color:#e3ebe3}
-footer{background:#102d25;color:#dce8df;text-align:center;padding:24px;font: .82rem system-ui}
-footer a{color:#f3c17d}
-@media(max-width:800px){.intro,.location{grid-template-columns:1fr}.fact-grid{grid-template-columns:repeat(2,1fr)}.story-grid{grid-template-columns:1fr}.hero{min-height:540px}.hero-inner{padding:70px 20px}h1{letter-spacing:-2px}.wrap{padding:56px 18px}}
-@media(max-width:470px){.nav{align-items:flex-start;flex-direction:column;gap:8px}nav{gap:13px}.fact-grid{grid-template-columns:1fr 1fr}.fact{padding:16px}.hero p{font-size:1.05rem}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CHINARLI — Arli Village community">
+  <title>CHINARLI | Arli Village Community</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header><div class="nav"><a class="brand" href="#home">CHINARLI<span>.</span></a><nav><a href="#about">Our village</a><a href="#pride">Village pride</a><a href="#location">Location</a><a href="#creator">Creator</a></nav></div></header>
-<main>
-<section class="hero" id="home">
-<svg class="landscape" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-<circle cx="1120" cy="145" r="70" fill="#f6c77f" opacity=".9"/>
-<path d="M0 430 Q180 330 360 420 T720 400 T1080 370 T1440 420 V700 H0Z" fill="#a6b47a"/>
-<path d="M0 500 Q230 370 470 480 T930 450 T1440 480 V700 H0Z" fill="#66865b"/>
-<path d="M0 570 Q250 470 510 550 T1000 530 T1440 560 V700 H0Z" fill="#315e45"/>
-<path d="M0 625 Q260 540 540 610 T1050 590 T1440 620 V700 H0Z" fill="#214b39"/>
-<g fill="#183d30"><path d="M170 510l25-100 25 100h-15v35h-20v-35z"/><path d="M260 535l30-125 30 125h-18v40h-24v-40z"/><path d="M1210 500l28-115 28 115h-17v36h-22v-36z"/><path d="M1300 530l25-100 25 100h-15v35h-20v-35z"/></g>
-<g fill="#d7bd8b" opacity=".9"><rect x="700" y="495" width="78" height="55" rx="3"/><path d="M690 496l49-38 49 38z"/><rect x="805" y="515" width="65" height="43" rx="3"/><path d="M796 516l42-32 42 32z"/></g>
-</svg>
-<div class="hero-inner"><div class="kicker">A little place with a big heart · Maharashtra, India</div><h1>CHINARLI</h1><p>Welcome to Arli — a village in Kelapur, Yavatmal. A place to remember the beauty of rural life, the strength of community and the quiet pride of belonging.</p><div class="byline">A website created by Viren Nalmelwar</div><a class="cta" href="#about">Discover Arli ↓</a></div>
-</section>
-<section class="wrap" id="about"><div class="intro"><div><div class="eyebrow">A village to be proud of</div><h2>Rooted in the heart of Vidarbha</h2><p class="lead">Arli is more than a name on a map. It is home: a place shaped by everyday kindness, familiar roads, shared celebrations and the connection between people and the land.</p><p>Set in Kelapur taluka of Yavatmal district, Maharashtra, Arli is part of the Vidarbha region. Like villages across this part of Maharashtra, its identity is connected to rural life, local traditions and the hard work of its people.</p></div><div class="quote">“A village becomes special not only because of where it is, but because of the people who call it home.”<small>CHINARLI · A tribute to Arli</small></div></div>
-<div class="fact-grid">
-<div class="fact"><b>Arli</b><span>Village name</span></div>
-<div class="fact"><b>445305</b><span>PIN code</span></div>
-<div class="fact"><b>Kelapur</b><span>Taluka / sub-district</span></div>
-<div class="fact"><b>Yavatmal</b><span>District, Maharashtra</span></div>
-</div></section>
-<section class="story" id="pride"><div class="wrap"><div class="eyebrow">The greatness of village life</div><h2>Small village. Enduring pride.</h2><p class="lead">The greatness of a village is found in the values its people carry forward.</p><div class="story-grid">
-<article class="story-card"><div class="symbol">🌾</div><h3>Connection to the land</h3><p>Rural life teaches patience, care for the land and respect for the work that brings food to our tables.</p></article>
-<article class="story-card"><div class="symbol">🤝</div><h3>Community and togetherness</h3><p>Neighbours, families and friends make a village feel like home through helping one another and sharing important moments.</p></article>
-<article class="story-card"><div class="symbol">🪔</div><h3>Traditions and identity</h3><p>Local customs, festivals, language, food and memories connect generations and give every place its own character.</p></article>
-</div></div></section>
-<section class="wrap" id="location"><div class="eyebrow">Find us on the map</div><h2>Where is Arli?</h2><div class="location"><div class="location-card"><h3>Arli, Kelapur</h3><p>Yavatmal district, Maharashtra, India</p><p><b>PIN code:</b> 445305<br><b>Region:</b> Vidarbha<br><b>Country:</b> India</p><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Arli%2C+Kelapur%2C+Yavatmal%2C+Maharashtra+445305" target="_blank" rel="noopener">Open Arli in Google Maps ↗</a><p class="note" style="color:#c8d8cc">The map search opens the general village location. Check the map pin before travelling.</p></div>
-<iframe class="map" title="Map search for Arli village, Kelapur, Yavatmal, Maharashtra" loading="lazy" src="https://www.google.com/maps?q=Arli%2C%20Kelapur%2C%20Yavatmal%2C%20Maharashtra%20445305&output=embed" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
-</section>
-<section class="wrap"><div class="eyebrow">A note about the village record</div><h2>Remembering our roots</h2><p>Public village-directory records identify Arli in Kelapur, Yavatmal, with PIN code 445305. The 2011 Census-based village figures reported by public village directories list 1,818 residents and 429 households. These are historical census figures, not a current population count. Administrative details and services can change, so check official records for current information.</p><p class="note">Reference links: <a href="https://censusindia.gov.in/nada/index.php/catalog/41188" target="_blank" rel="noopener">Census of India 2011 – Yavatmal village data</a> · <a href="https://yavatmal.gov.in/en/village-panchayats/" target="_blank" rel="noopener">Yavatmal District – Village & Panchayats</a> · <a href="https://www.villagemaps.in/maharashtra/arli-kelapur-yavatmal-543554/" target="_blank" rel="noopener">Arli village directory (secondary source)</a>.</p></section>
-<section class="creator" id="creator"><div class="eyebrow" style="color:#f4c47f">Made with pride</div><div class="name">Viren Nalmelwar</div><p>Creator of CHINARLI — a small digital tribute to the beautiful village of Arli, Yavatmal, Maharashtra.</p><p>Celebrating our village, its people and the place we proudly call home.</p></section>
-</main>
-<footer>© <span id="year"></span> CHINARLI · Created by Viren Nalmelwar · A village tribute, made with pride.</footer>
-<script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">C</span><span>CHINARLI<small>ARLI VILLAGE COMMUNITY</small></span></a>
+    <nav><a href="#groups">Groups</a><a href="#about">About</a></nav>
+    <button class="btn btn-outline" id="openLogin">Sign in</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">ONE VILLAGE · ONE COMMUNITY</span>
+        <h1>Welcome to <em>Arli</em> Village.</h1>
+        <p>A place for our community to share updates, join groups, celebrate events and stay connected.</p>
+        <div class="hero-actions">
+          <button class="btn btn-light" id="joinBtn">Join the community <span>→</span></button>
+          <a class="text-link" href="#groups">Explore groups</a>
+        </div>
+        <div class="hero-note"><span class="live-dot"></span> Built for neighbours, families and friends</div>
+      </div>
+      <div class="hero-art" role="img" aria-label="Illustration of a peaceful village landscape">
+        <div class="sun"></div><div class="hill hill-back"></div><div class="hill hill-front"></div>
+        <div class="house house-one"><i></i></div><div class="house house-two"><i></i></div>
+        <div class="tree tree-one"></div><div class="tree tree-two"></div>
+        <div class="art-label">OUR HOME · ARLI</div>
+      </div>
+    </section>
+
+    <section class="section intro" id="about">
+      <div><span class="eyebrow">CONNECTED TOGETHER</span><h2>Our village, <em>our voice.</em></h2></div>
+      <p>CHINARLI brings village conversations and useful information into one welcoming online space. Be kind, keep information respectful, and help everyone feel included.</p>
+    </section>
+
+    <section class="section" id="groups">
+      <div class="section-heading"><div><span class="eyebrow">FIND YOUR PEOPLE</span><h2>Community groups</h2></div><span class="muted">Choose a group to open its chat</span></div>
+      <div class="group-grid" id="groupGrid"></div>
+    </section>
+
+    <section class="section chat-section" id="chat">
+      <div class="section-heading"><div><span class="eyebrow">LIVE COMMUNITY CONVERSATIONS</span><h2>Village chat</h2></div><span class="muted" id="chatStatus">Sign in to join the conversation</span></div>
+      <div class="chat-shell">
+        <aside class="chat-sidebar"><h3>Village groups</h3><div id="chatGroupList"></div></aside>
+        <section class="chat-main">
+          <div class="chat-head"><div><strong id="activeGroupName">General Village</strong><small id="activeGroupDescription">Community conversation</small></div><span class="chat-live"><i></i> Live chat</span></div>
+          <div class="chat-messages" id="messages"><div class="chat-empty">Sign in and select a group to see messages.</div></div>
+          <form id="messageForm" class="chat-compose"><input id="messageInput" maxlength="1000" placeholder="Sign in to send a message..." autocomplete="off" disabled><button class="btn btn-primary" type="submit" disabled id="sendMessage">Send</button></form>
+          <p class="chat-hint">Be respectful. Do not share passwords, private details or harmful content.</p>
+        </section>
+      </div>
+    </section>
+
+    <section class="notice">
+      <div class="notice-icon">✦</div><div><strong>Good conversations build a stronger community.</strong><p>Share helpful information, respect privacy and report content that seems unsafe or inappropriate.</p></div>
+      <button class="btn btn-dark" id="noticeJoin">Get started</button>
+    </section>
+  </main>
+
+  <footer><a class="brand footer-brand" href="#"><span class="brand-mark">C</span><span>CHINARLI<small>ARLI VILLAGE COMMUNITY</small></span></a><span>Made for the Arli community.</span><span>© <span id="year"></span> CHINARLI</span></footer>
+
+  <div class="modal-backdrop" id="authModal" aria-hidden="true">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="close" id="closeModal" aria-label="Close">×</button>
+      <div class="modal-logo">C</div>
+      <span class="eyebrow">WELCOME TO CHINARLI</span>
+      <h2 id="modalTitle">Join your community.</h2>
+      <p class="modal-sub">This is a design preview. Connect a real authentication service before collecting accounts.</p>
+      <div class="tabs"><button class="tab active" data-mode="signin">Sign in</button><button class="tab" data-mode="signup">Create account</button></div>
+      <form id="authForm">
+        <label id="nameWrap" class="hidden">Your name<input id="fullName" type="text" placeholder="Enter your name"></label>
+        <label>Email address<input id="email" type="email" placeholder="you@example.com" required></label>
+        <label>Password<input id="password" type="password" placeholder="At least 8 characters" minlength="8" required></label>
+        <button class="btn btn-primary full" type="submit" id="submitAuth">Sign in</button>
+      </form>
+      <button class="google-btn" id="googleDemo"><span class="google-g">G</span> Continue with Google <small>Demo only</small></button>
+      <p class="fineprint">By continuing, you agree to follow the community rules and respect other members' privacy.</p>
+      <div id="authMessage" class="message" role="status"></div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script type="module" src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHINARLI Calculator</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f6f8;display:flex;justify-content:center;padding:30px 15px}
+.calculator{width:100%;max-width:360px;background:#fff;padding:18px;border-radius:20px;box-shadow:0 8px 25px #0002}
+.display{height:80px;background:#eef1f4;border-radius:14px;margin-bottom:14px;padding:15px;font-size:32px;text-align:right;overflow:auto}
+.keys{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+button{height:58px;border:0;border-radius:14px;background:#e9edf1;font-size:20px;cursor:pointer}
+button:active{transform:scale(.97)}
+.operator,.equal{background:#222;color:#fff}
+.equal{grid-column:span 2}
+</style>
+</head>
+<body>
+<div class="calculator">
+  <div class="display" id="display">0</div>
+  <div class="keys">
+    <button onclick="clearAll()">AC</button>
+    <button onclick="del()">⌫</button>
+    <button onclick="add('%')">%</button>
+    <button class="operator" onclick="add('/')">÷</button>
+    <button onclick="add('7')">7</button><button onclick="add('8')">8</button><button onclick="add('9')">9</button>
+    <button class="operator" onclick="add('*')">×</button>
+    <button onclick="add('4')">4</button><button onclick="add('5')">5</button><button onclick="add('6')">6</button>
+    <button class="operator" onclick="add('-')">−</button>
+    <button onclick="add('1')">1</button><button onclick="add('2')">2</button><button onclick="add('3')">3</button>
+    <button class="operator" onclick="add('+')">+</button>
+    <button onclick="add('0')">0</button><button onclick="add('.')">.</button>
+    <button class="equal" onclick="calculate()">=</button>
+  </div>
+</div>
+<script>
+let value="";
+const display=document.getElementById("display");
+function show(){display.textContent=value||"0"}
+function add(x){if(value==="Error")value="";value+=x;show()}
+function clearAll(){value="";show()}
+function del(){value=value.slice(0,-1);show()}
+function calculate(){
+  try{
+    if(!/^[0-9+\-*/%.() ]+$/.test(value))throw 0;
+    let result=Function("return "+value.replace(/%/g,"/100"))();
+    if(!Number.isFinite(result))throw 0;
+    value=String(Math.round(result*1e12)/1e12);
+  }catch{value="Error"}
+  show();
+}
+document.addEventListener("keydown",e=>{
+  if(/[0-9+\-*/%.]/.test(e.key))add(e.key);
+  else if(e.key==="Enter")calculate();
+  else if(e.key==="Backspace")del();
+  else if(e.key==="Escape")clearAll();
+});
+</script>
+</body>
+</html>
